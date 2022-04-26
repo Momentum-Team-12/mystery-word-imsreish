@@ -24,12 +24,11 @@ def play_game():
                     print(letter, end=" ")
 
                 else:
-                    print("_")
-                    # print(letter, end=" ")
+                    print("_", end=" ")
                     failed += 1
 
             if failed == 0:
-                print(f'Good job! You guessed the word in {turns} guesses!')
+                print(f'Good job! You guessed the word in {8 - turns} guesses!')
                 break
 
             print()
