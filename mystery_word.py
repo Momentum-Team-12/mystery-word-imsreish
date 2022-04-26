@@ -30,18 +30,18 @@ def play_game():
 
             if failed == 0:
                 print(f'Good job! You guessed the word in {turns} guesses!')
-            break
+                break
 
-        print()
-        guess = input("Guess a letter: ")
-        guesses += guess
+            print()
+            guess = input("Guess a letter: ")
+            guesses += guess
 
-        if guess not in random_word:
-            turns -= 1
-            print(f'Not quite. You have {turns} guesses left.')
+            if guess not in random_word:
+                turns -= 1
+                print(f'Not quite. You have {turns} guesses left.')
 
-            if turns == 0:
-                print("Game over")
+                if turns == 0:
+                    print("Game over")
 
 
 if __name__ == "__main__":
