@@ -1,6 +1,7 @@
 import string
 import random
 import sys
+import time
 
 
 def play_again():
@@ -26,7 +27,15 @@ def play_game():
         contents_list = contents_string.split()
         random_word = random.choice(contents_list)
         print(random_word)
-        print(f'I am thinking of a word. It has {len(random_word)} letters...')
+        print(f'Welcome!')
+        time.sleep(1)
+        print(f'(To exit at any time, press Control C (^C) on your keyboard.)')
+        time.sleep(1)
+        print(f'Getting ready...')
+        time.sleep(2)
+        print(f'I am thinking of a word.')
+        time.sleep(1)
+        print(f'It has {len(random_word)} letters...')
         print()
 
         guesses = ' '
