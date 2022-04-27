@@ -6,28 +6,68 @@ import time
 
 def play_start():
     print(f'Welcome!')
-    time.sleep(1)
-    print(f'(To exit at any time, press Control C (^C) on your keyboard.)')
     time.sleep(2)
-    print(f'Some of these wont work yet!')
-    print(f'Press P to play. Press R for rules. Press D for difficulty. Press L for language.')
+    print(f'Press D to play with defaults. Press O for options. Press I for rules.')
     playstart_response = input()
-    play_option = ['p', 'P']
-    difficulty_option = ['d', 'D']
-    if playstart_response in play_option:
+    defaults_option = ['d', 'D']
+    options_option = ['o', 'O', '0']
+    if playstart_response in defaults_option:
         time.sleep(1)
         print(f'Getting ready...')
         time.sleep(2)
-        play_game()
-    if playstart_response in difficulty_option:
-        play_difficulty()
+        play_defaults()
+    if playstart_response in options_option:
+        play_options()
     else:
-        print("Invalid response. Press P to play, or press Command C (^C) to exit.")
+        print(f'Invalid response.')
         time.sleep(1)
-        print("Starting again in a moment...")
+        print(f'(To exit at any time, press Control C (^C).)')
+        time.sleep(2)
+        print(f'Starting again in a moment...')
         time.sleep(3)
+        print(f'---')
         print()
         play_start()
+
+
+def play_defaults():
+    with open('words.txt') as file_contents:
+        # read the contents
+        contents_string = file_contents.read()
+        contents_list = contents_string.split()
+        MEDIUM_LIST = []
+        for word in contents_list:
+            if 7 <= len(word) <= 8:
+                MEDIUM_LIST.append(word)
+        selected_list = MEDIUM_LIST
+        random_word = random.choice(selected_list)
+        play_game(random_word)
+
+
+def play_options():
+    print(f'Options:')
+    time.sleep(2)
+    print(f'To view rules, press R.')
+    time.sleep(1)
+    print(f'To play with defaults (intensity: easy, language: en), press D.')
+    time.sleep(1)
+    print(f'To change gameplay intensity, press I.')
+    time.sleep(1)
+    print(f'To change language pack, press L.')
+    playoptions_response = input()
+    rules_option = ['r', 'R']
+    defaults_option = ['d', 'D']
+    intensity_option = ['i', 'I']
+    if playoptions_response in defaults_option:
+        time.sleep(1)
+        print(f'Getting ready...')
+        time.sleep(2)
+        play_defaults()
+    if playstart_response in intensity_option:
+        play_difficulty()
+    else:
+        print(f'Invalid response.')
+        play_options()
 
 
 def play_difficulty():
@@ -36,22 +76,53 @@ def play_difficulty():
         contents_string = file_contents.read()
         contents_list = contents_string.split()
         EASY_LIST = []
-        NORMAL_LIST = []
+        MEDIUM_LIST = []
         HARD_LIST = []
         for word in contents_list:
             if 4 <= len(word) <= 6:
                 EASY_LIST.append(word)
             elif 7 <= len(word) <= 8:
-                NORMAL_LIST.append(word)
+                MEDIUM_LIST.append(word)
             elif 9 <= len(word):
                 HARD_LIST.append(word)
-        selected_list = NORMAL_LIST
-        random_word = random.choice(selected_list)
-        play_game(random_word)
+        print(f'Select an intensity:')
+        time.sleep(1)
+        print(f'Press E for mild')
+        print(f'Press M for medium')
+        print(f'Press H for caliente')
+        playdifficulty_response = input()
+        easy_option = ['e', 'E']
+        medium_option = ['m', 'M']
+        hard_option = ['h', 'H']
+        if playdifficulty_response in easy_option:
+            time.sleep(1)
+            print(f'Getting ready...')
+            time.sleep(2)
+            selected_list = EASY_LIST
+            random_word = random.choice(selected_list)
+            play_game(random_word)
+        if playdifficulty_response in medium_option:
+            time.sleep(1)
+            print(f'Getting ready...')
+            time.sleep(2)
+            selected_list = MEDIUM_LIST
+            random_word = random.choice(selected_list)
+            play_game(random_word)
+        if playdifficulty_response in hard_option:
+            time.sleep(1)
+            print(f'Getting ready...')
+            time.sleep(2)
+            selected_list = HARD_LIST
+            random_word = random.choice(selected_list)
+            play_game(random_word)
+        else:
+            print(f'Invalid response.')
+            time.sleep(1)
+            play_difficulty()
 
 
 def play_again():
-    print("Game over. Would you like to play again? y/n")
+    print(f'Game over. Would you like to play again? y/n')
     play_response = input()
     yes_input = ['y', 'Y']
     no_input = ['n', 'N']
@@ -63,7 +134,8 @@ def play_again():
         time.sleep(1)
         exit()
     else:
-        print("Invalid response. Enter y for new game, n to exit.")
+        print(f'Invalid response. Enter y for new game, n to exit.')
+        time.sleep(1)
         play_again()
     exit()
 
