@@ -4,6 +4,19 @@ import sys
 import time
 
 
+def play_start():
+    print(f'Welcome!')
+    time.sleep(2)
+    print(f'(To exit at any time, press Control C (^C) on your keyboard.)')
+    time.sleep(2)
+    print(f'Press P to play.')
+    playstart_response = input()
+    play_input = ['p', 'P']
+    if playstart_response in play_input:
+        play_game()
+    else:
+        print("Invalid response. Press P to play, or press Command C (^C) to exit.")
+
 def play_again():
     print("Game over. Would you like to play again? y/n")
     play_response = input()
@@ -27,15 +40,12 @@ def play_game():
         contents_list = contents_string.split()
         random_word = random.choice(contents_list)
         print(random_word)
-        print(f'Welcome!')
-        time.sleep(1)
-        print(f'(To exit at any time, press Control C (^C) on your keyboard.)')
         time.sleep(1)
         print(f'Getting ready...')
         time.sleep(2)
         print(f'I am thinking of a word.')
         time.sleep(1)
-        print(f'It has {len(random_word)} letters...')
+        print(f'It has {len(random_word)} letters:')
         print()
 
         guesses = ' '
@@ -57,7 +67,7 @@ def play_game():
                 play_again()
 
             print()
-            guess = input("Guess a letter: ")
+            guess = input("Guess a letter... ")
             guesses += guess
 
             if guess not in random_word:
@@ -70,4 +80,4 @@ def play_game():
 
 
 if __name__ == "__main__":
-    play_game()
+    play_start()
