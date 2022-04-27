@@ -1,5 +1,21 @@
 import string
 import random
+import sys
+
+
+def play_again():
+    print("Game over. Would you like to play again? y/n")
+    play_response = input()
+    yes_input = ['y', 'Y']
+    no_input = ['n', 'N']
+    if play_response in yes_input:
+        play_game()
+    elif play_response in no_input:
+        exit()
+    else:
+        print("Invalid response. Enter y for new game, n to exit.")
+        play_again()
+    exit()
 
 
 def play_game():
@@ -29,7 +45,7 @@ def play_game():
 
             if failed == 0:
                 print(f'Good job! You guessed the word in {8 - turns} guesses!')
-                break
+                play_again()
 
             print()
             guess = input("Guess a letter: ")
@@ -40,7 +56,8 @@ def play_game():
                 print(f'Not quite. You have {turns} guesses left.')
 
                 if turns == 0:
-                    print("Game over")
+                    # call play_again
+                    play_again()
 
 
 if __name__ == "__main__":
