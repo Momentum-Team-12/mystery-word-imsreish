@@ -6,19 +6,29 @@ import time
 
 def play_start():
     print(f'Welcome!')
-    time.sleep(2)
+    time.sleep(1)
     print(f'(To exit at any time, press Control C (^C) on your keyboard.)')
     time.sleep(2)
-    print(f'Press P to play. Press R for rules. Press D for difficulty. Press V for version.')
+    print(f'Some of these wont work yet!')
+    print(f'Press P to play. Press R for rules. Press D for difficulty. Press L for language.')
     playstart_response = input()
-    play_input = ['p', 'P']
-    if playstart_response in play_input:
+    play_option = ['p', 'P']
+    difficulty_option = ['d', 'D']
+    if playstart_response in play_option:
         time.sleep(1)
         print(f'Getting ready...')
         time.sleep(2)
         play_game()
+    if playstart_response in difficulty_option:
+        play_difficulty()
     else:
         print("Invalid response. Press P to play, or press Command C (^C) to exit.")
+        time.sleep(1)
+        print("Starting again in a moment...")
+        time.sleep(3)
+        print()
+        play_start()
+
 
 def play_difficulty():
     with open('words.txt') as file_contents:
@@ -30,13 +40,14 @@ def play_difficulty():
         HARD_LIST = []
         for word in contents_list:
             if 4 <= len(word) <= 6:
-                EASY_LIST.append
+                EASY_LIST.append(word)
             elif 7 <= len(word) <= 8:
-                NORMAL_LIST.append
+                NORMAL_LIST.append(word)
             elif 9 <= len(word):
-                HARD_LIST.append
-        user_list = NORMAL_LIST
-        return user_list
+                HARD_LIST.append(word)
+        selected_list = NORMAL_LIST
+        random_word = random.choice(selected_list)
+        play_game(random_word)
 
 
 def play_again():
@@ -47,6 +58,9 @@ def play_again():
     if play_response in yes_input:
         play_game()
     elif play_response in no_input:
+        time.sleep(1)
+        print(f'See you next time!')
+        time.sleep(1)
         exit()
     else:
         print("Invalid response. Enter y for new game, n to exit.")
@@ -54,9 +68,7 @@ def play_again():
     exit()
 
 
-def play_game():
-    user_list = play_difficulty()
-    random_word = random.choice(user_list)
+def play_game(random_word):
     print(random_word)
     time.sleep(1)
 
