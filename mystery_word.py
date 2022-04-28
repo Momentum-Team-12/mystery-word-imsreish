@@ -2,7 +2,7 @@ import random
 import time
 # from pynput.keyboard import Key, Controller
 # keyboard = Controller()
-    
+
 
 def play_start():
     print()
@@ -10,10 +10,12 @@ def play_start():
     time.sleep(1.5)
     print(f'Press D to play with defaults. Press O for options. Press R')
     print(f'for rules.')
+
     playstart_response = input()
     defaults_option = ['d', 'D']
     options_option = ['o', 'O', '0']
     rules_option = ['r', 'R']
+
     if playstart_response in defaults_option:
         time.sleep(1)
         print(r'Starting new game on intensity medium.')
@@ -21,10 +23,13 @@ def play_start():
         print(f'Getting ready...')
         time.sleep(2)
         play_defaults()
+
     if playstart_response in options_option:
         play_options()
+
     if playstart_response in rules_option:
         play_rules()
+
     else:
         print(f'Invalid response.')
         time.sleep(1)
@@ -43,9 +48,11 @@ def play_defaults():
         contents_string = file_contents.read()
         contents_list = contents_string.split()
         MEDIUM_LIST = []
+
         for word in contents_list:
             if 7 <= len(word) <= 8:
                 MEDIUM_LIST.append(word)
+
         selected_list = MEDIUM_LIST
         random_word = random.choice(selected_list)
         play_game(random_word)
@@ -62,13 +69,16 @@ def play_options():
     time.sleep(3.5)
     print(f'---')
     print(f'To go back, press X. To exit, press Control C (^C).')
+
     playoptions_response = input()
     rules_option = ['r', 'R']
     defaults_option = ['d', 'D']
     intensity_option = ['i', 'I']
     exit_option = ['x', 'X']
+
     if playoptions_response in rules_option:
         play_rules()
+
     if playoptions_response in defaults_option:
         time.sleep(1)
         print(r'Starting new game on intensity medium.')
@@ -76,12 +86,15 @@ def play_options():
         print(f'Getting ready...')
         time.sleep(2)
         play_defaults()
+
     if playoptions_response in intensity_option:
         play_difficulty()
+
     if playoptions_response in exit_option:
         print(f'///')
         print()
         play_start()
+
     else:
         print(f'Invalid response. Select an intensity, or press X to go back.')
         print(f'///')
@@ -107,11 +120,13 @@ def play_rules():
     time.sleep(5)
     print(f'---')
     print(f'To go back, press any input key.')
+
     playrules_response = input()
     if playrules_response != '':
         print(r'///')
         print()
         play_start()
+
 
 def play_difficulty():
     with open('words.txt') as file_contents:
@@ -121,6 +136,7 @@ def play_difficulty():
         EASY_LIST = []
         MEDIUM_LIST = []
         HARD_LIST = []
+
         for word in contents_list:
             if 4 <= len(word) <= 6:
                 EASY_LIST.append(word)
@@ -128,6 +144,7 @@ def play_difficulty():
                 MEDIUM_LIST.append(word)
             elif 9 <= len(word):
                 HARD_LIST.append(word)
+
         print()
         print(f'Select an intensity:')
         print(f'---')
@@ -135,10 +152,12 @@ def play_difficulty():
         print(f'Press E for easy')
         print(f'Press M for medium')
         print(f'Press H for hard')
+
         playdifficulty_response = input()
         easy_option = ['e', 'E']
         medium_option = ['m', 'M']
         hard_option = ['h', 'H']
+
         if playdifficulty_response in easy_option:
             time.sleep(1)
             print(r'Starting new game on setting easy.')
@@ -148,6 +167,7 @@ def play_difficulty():
             selected_list = EASY_LIST
             random_word = random.choice(selected_list)
             play_game(random_word)
+
         if playdifficulty_response in medium_option:
             time.sleep(1)
             print(r'Starting new game on setting medium.')
@@ -157,6 +177,7 @@ def play_difficulty():
             selected_list = MEDIUM_LIST
             random_word = random.choice(selected_list)
             play_game(random_word)
+
         if playdifficulty_response in hard_option:
             time.sleep(1)
             print(r'Starting new game on setting hard.')
@@ -166,6 +187,7 @@ def play_difficulty():
             selected_list = HARD_LIST
             random_word = random.choice(selected_list)
             play_game(random_word)
+
         else:
             print(f'Invalid response. Select an intensity, or press X')
             print(f'to start over.')
@@ -178,15 +200,18 @@ def play_again():
     play_response = input()
     yes_input = ['y', 'Y']
     no_input = ['n', 'N']
+
     if play_response in yes_input:
         print(f'///')
         print()
         play_start()
+
     elif play_response in no_input:
         time.sleep(1)
         print(f'See you next time!')
         time.sleep(1)
         exit()
+
     else:
         print(f'Invalid response. Enter y for new game, n to quit game.')
         time.sleep(1)
@@ -202,25 +227,32 @@ def play_game(random_word):
     time.sleep(2)
     print(f'It has {len(random_word)} letters:')
     print()
+
     guesses = ' '
     turns = 8
+
     while turns > 0:
         failed = 0
+
         for letter in random_word:
             if letter in guesses:
                 print(letter, end=" ")
+
             else:
                 print("_", end=" ")
                 failed += 1
+
         if failed == 0:
             print(f'Good job! You guessed the word in {8 - turns} guesses! 😀')
             play_again()
         print()
         guess = input("Guess a letter... ")
         guesses += guess
+
         if guess not in random_word:
             turns -= 1
             print(f'Not quite. You have {turns} guesses left.')
+
             if turns == 0:
                 print(f'So close! The word was {random_word}.')
                 play_again()
