@@ -55,7 +55,7 @@ def play_options():
     print(f'---')
     time.sleep(1)
     print(f'To view rules, press R.')
-    print(f'To play with defaults (intensity: easy, language: en), press D.')
+    print(f'To play with defaults (intensity: medium, language: en), press D.')
     print(f'To change gameplay intensity, press I.')
     time.sleep(3.5)
     print(f'---')
