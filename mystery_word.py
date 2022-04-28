@@ -102,7 +102,7 @@ def play_rules():
     print(f'   Press enter/return to submit your guess.')
     print(f'4. If your guess is correct, I will show it to you.')
     print(f'5. You only lose a guess if you guess incorrectly.')
-    print(f'   The game ends when either you guess the word successfully')
+    print(f'6. The game ends when either you guess the word successfully')
     print(f'   or you run out of guesses.')
     time.sleep(5)
     print(f'---')
